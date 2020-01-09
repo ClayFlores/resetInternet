@@ -1,21 +1,31 @@
 // resetInternet.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+// This program is IT101 in that it takes the internet and turns it off then on again
 
 #include "pch.h"
 #include <iostream>
+#include <stdlib.h> // needed for system
+#include <windows.h> // needed to sleep
+
 
 int main()
-{
-    std::cout << "Hello World!\n"; 
+{	
+	int i;
+    std::cout << "Checking availability..." << std::endl; 
+	if (system(NULL)) std::cout << ("Ok") << std::endl;
+	else exit (EXIT_FAILURE);
+
+	std::cout << std::endl;
+	std::cout << "Releasing IP" << std::endl;
+	//i = system("ipconfig /release Ethernet"); // example to stop only one connection where Ethernet is the name of the connection to be stopped
+	i = system("ipconfig /release"); // general use, undos all connections
+
+	std::cout << std::endl;
+	std::cout << "Waiting to refresh Internet..." << std::endl;
+	Sleep(15000);
+
+	//i = system("ipconfig /renew Ethernet"); // example to start only one connection where Ethernet is the name of the connection to be started
+	i = system("ipconfig /renew"); // renews all connections
+
+
+	return 0;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
